@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>App de Vídeos e Chat</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; }
+  h1 { text-align: center; }
+  section { margin-bottom: 30px; }
+  button { padding: 10px 20px; margin-top: 10px; }
+  textarea { width: 100%; height: 80px; }
+  input[type="file"] { display: block; margin-top: 10px; }
+  #chat { border: 1px solid #ccc; padding: 10px; height: 200px; overflow-y: scroll; }
+</style>
+</head>
+<body>
+
+<h1>App de Vídeo e Chat</h1>
+
+<!-- Seção de gerar vídeo por imagens -->
+<section>
+  <h2>Gerar vídeo a partir de imagens</h2>
+  <input type="file" id="imageInput" multiple accept="image/*">
+  <button onclick="generateVideoFromImages()">Gerar Vídeo</button>
+  <video id="videoOutput" controls style="display:none; width: 100%; margin-top:10px;"></video>
+</section>
+
+<!-- Seção de gerar vídeo por texto -->
+<section>
+  <h2>Gerar vídeo a partir de texto</h2>
+  <textarea id="textInput" placeholder="Digite o texto aqui"></textarea>
+  <button onclick="generateVideoFromText()">Gerar Vídeo</button>
+  <video id="textVideoOutput" controls style="display:none; width: 100%; margin-top:10px;"></video>
+</section>
+
+<!-- Seção de chatbot -->
+<section>
+  <h2>Chatbot</h2>
+  <div id="chat"></div>
+  <input type="text" id="userMessage" placeholder="Digite sua mensagem" onkeydown="if(event.key==='Enter'){sendMessage()}">
+  <button onclick="sendMessage()">Enviar</button>
+</section>
+
+<script>
+/* ----------------- Função de gerar vídeo a partir de imagens ----------------- */
+function generateVideoFromImages() {
+  const input = document.getElementById('imageInput');
+  const files = input.files;
+  if(files.length === 0) {
+    alert("Selecione pelo menos uma imagem.");
+    return;
+  }
+
+  // Aqui normalmente você precisaria de uma biblioteca JS para criar vídeo, como Whammy.js
+  alert("Funcionalidade de gerar vídeo a partir de imagens (simulada).");
+  document.getElementById('videoOutput').style.display = 'block';
+  document.getElementById('videoOutput').src = ''; // Substituir com vídeo gerado
+}
+
+/* ----------------- Função de gerar vídeo a partir de texto ----------------- */
+function generateVideoFromText() {
+  const text = document.getElementById('textInput').value;
+  if(!text.trim()) {
+    alert("Digite algum texto.");
+    return;
+  }
+
+  // Aqui você precisaria de API de TTS + conversão para vídeo (simulação)
+  alert("Funcionalidade de gerar vídeo a partir de texto (simulada).");
+  document.getElementById('textVideoOutput').style.display = 'block';
+  document.getElementById('textVideoOutput').src = ''; // Substituir com vídeo gerado
+}
+
+/* ----------------- Função de chatbot ----------------- */
+function sendMessage() {
+  const input = document.getElementById('userMessage');
+  const chat = document.getElementById('chat');
+  const userText = input.value.trim();
+  if(!userText) return;
+  
+  // Exibe mensagem do usuário
+  chat.innerHTML += `<div><b>Você:</b> ${userText}</div>`;
+  
+  // Resposta automática simples
+  const botResponse = "Olá! Você disse: " + userText;
+  chat.innerHTML += `<div><b>Bot:</b> ${botResponse}</div>`;
+  
+  input.value = '';
+  chat.scrollTop = chat.scrollHeight;
+}
+</script>
+
+</body>
+</html>
